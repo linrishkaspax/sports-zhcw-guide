@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中彩网 · 信息指引卡片</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f2f4f8;
+      color: #1e2a3a;
+      line-height: 1.6;
+      padding: 2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page-wrapper {
+      max-width: 1080px;
+      width: 100%;
+    }
+
+    /* 主视觉 —— 信息卡片式 hero */
+    .hero-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 2.5rem 2.8rem;
+      box-shadow: 0 8px 24px rgba(0, 20, 30, 0.06);
+      border: 1px solid #eaeef2;
+      margin-bottom: 2.2rem;
+      transition: transform 0.2s ease;
+    }
+
+    .hero-card h1 {
+      font-size: 2.4rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: #0b1c2b;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-card .sub {
+      font-size: 1.1rem;
+      color: #3f5567;
+      border-left: 4px solid #8499b0;
+      padding-left: 1.2rem;
+      margin: 0.6rem 0 1.2rem 0;
+    }
+
+    .hero-card p {
+      max-width: 700px;
+      color: #2d4054;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin: 2rem 0 2.5rem 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.8rem 2rem;
+      border: 1px solid #e2e8ed;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 2px 6px rgba(0, 20, 30, 0.04);
+      transition: box-shadow 0.15s;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 20, 30, 0.06);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 550;
+      color: #1a2e42;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card h3::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1.1em;
+      background: #8499b0;
+      border-radius: 4px;
+      margin-right: 0.3rem;
+    }
+
+    .card p, .card li {
+      color: #2a4056;
+      font-size: 0.98rem;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .card li {
+      padding: 0.2rem 0 0.2rem 1rem;
+      position: relative;
+    }
+
+    .card li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: #738aa2;
+      font-weight: bold;
+    }
+
+    /* 自然链接段落（卡片式） */
+    .link-paragraph-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 2.2rem;
+      border: 1px solid #e2e8ed;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      margin: 1rem 0 2.2rem 0;
+    }
+
+    .link-paragraph-card p {
+      margin-bottom: 0.5rem;
+      color: #1f3348;
+    }
+
+    .link-paragraph-card a {
+      color: #1a5a7a;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: #b6cbd9;
+      font-weight: 500;
+      transition: color 0.15s, text-decoration-color 0.2s;
+    }
+
+    .link-paragraph-card a:hover {
+      color: #0e3e5a;
+      text-decoration-color: #1a5a7a;
+    }
+
+    /* 适合人群 额外带小标签 */
+    .audience-tag {
+      display: inline-block;
+      background: #e9eff4;
+      color: #1f3a4e;
+      font-size: 0.8rem;
+      padding: 0.1rem 0.8rem;
+      border-radius: 40px;
+      margin-right: 0.4rem;
+      margin-bottom: 0.3rem;
+      border: 1px solid #d6e0e8;
+    }
+
+    /* FAQ摘要（简约折叠卡片） */
+    .faq-mini {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.6rem 2rem 2rem;
+      border: 1px solid #e2e8ed;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+      margin-top: 1.2rem;
+    }
+
+    .faq-mini h4 {
+      font-weight: 500;
+      color: #1b3144;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #edf1f5;
+      padding: 0.6rem 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      color: #1f3a4e;
+    }
+
+    .faq-a {
+      color: #3d5670;
+      font-size: 0.95rem;
+      margin-top: 0.1rem;
+    }
+
+    .faq-a a {
+      color: #1a5a7a;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: #c2d4e2;
+    }
+
+    .faq-a a:hover {
+      color: #0e3e5a;
+    }
+
+    /* 脚注 */
+    .footer-note {
+      margin-top: 3.2rem;
+      font-size: 0.85rem;
+      color: #5b7186;
+      text-align: center;
+      border-top: 1px solid #dfe6ec;
+      padding-top: 1.8rem;
+    }
+
+    /* 响应式微调 */
+    @media (max-width: 600px) {
+      body { padding: 1.2rem 1rem; }
+      .hero-card { padding: 1.8rem 1.2rem; }
+      .hero-card h1 { font-size: 1.8rem; }
+      .card-grid { gap: 1.2rem; }
+      .link-paragraph-card { padding: 1.5rem 1.2rem; }
+      .faq-mini { padding: 1.2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- 主视觉卡片 -->
+  <div class="hero-card">
+    <h1>中彩网 · 用途速览</h1>
+    <div class="sub">快速识别网站核心方向</div>
+    <p>如果你刚接触到 <strong>中彩网</strong>，想用最短时间了解它主要做什么、适合谁、能解决什么问题，下面这几张卡片已经把关键信息整理好了。</p>
+  </div>
+
+  <!-- 信息卡片网格：用途卡片 + 适合人群 -->
+  <div class="card-grid">
+    <!-- 用途卡片 1 -->
+    <div class="card">
+      <h3>主要用途</h3>
+      <p>中彩网围绕彩票信息与数据服务，提供开奖结果、历史走势、玩法说明以及相关资讯。帮助用户快速查找公开的彩票信息，不涉及购彩或资金交易。</p>
+    </div>
+
+    <!-- 用途卡片 2 -->
+    <div class="card">
+      <h3>适合人群</h3>
+      <ul>
+        <li>想查询开奖号码的购彩者</li>
+        <li>需要走势图辅助分析的爱好者</li>
+        <li>关注彩票政策与公告的普通用户</li>
+        <li>希望了解玩法规则的初次接触者</li>
+      </ul>
+      <div style="margin-top: 1rem;">
+        <span class="audience-tag">数据查询</span>
+        <span class="audience-tag">走势参考</span>
+        <span class="audience-tag">规则阅读</span>
+      </div>
+    </div>
+
+    <!-- 用途卡片 3：特点 / 场景 -->
+    <div class="card">
+      <h3>常见使用场景</h3>
+      <ul>
+        <li>开奖后快速核对号码</li>
+        <li>回顾近期冷热趋势</li>
+        <li>查看不同玩法的奖金结构</li>
+        <li>阅读官方公告及防骗提示</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 自然链接段落卡片（嵌入中彩网链接） -->
+  <div class="link-paragraph-card">
+    <p>以上介绍的用途和场景，都对应着 <a href="https://sports-zhcw.com">中彩网</a> 的实际板块。如果你之前没用过，可以直接到站内浏览开奖数据、走势图表或玩法百科，页面结构比较清晰，不需要注册也能查看大部分公开内容。</p>
+    <p>另外，网站也包含一些工具类页面，例如快速筛选、遗漏统计等，适合有分析习惯的用户。你可以根据自己需求选择对应栏目。</p>
+  </div>
+
+  <!-- FAQ 摘要卡片 -->
+  <div class="faq-mini">
+    <h4>常见疑问摘要</h4>
+
+    <div class="faq-item">
+      <div class="faq-q">Q：中彩网是否提供购彩服务？</div>
+      <div class="faq-a">A：不提供。网站定位为信息参考平台，不涉及任何线上购彩或代购。所有彩票销售须通过合法线下实体店。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q：数据更新及时吗？</div>
+      <div class="faq-a">A：通常开奖后较快同步，具体时效可参考站内说明。建议同时关注彩票机构官方公告作为最终依据。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Q：需要注册才能使用吗？</div>
+      <div class="faq-a">A：大部分功能（如查开奖、看走势）无需登录。部分个性化工具可能需注册，以站内实际提示为准。</div>
+    </div>
+
+    <div style="margin-top: 1.2rem; font-size: 0.95rem; border-top: 1px solid #edf1f5; padding-top: 0.8rem;">
+      <span>🔍 若想直接查看详细玩法或最新开奖，可前往 <a href="https://sports-zhcw.com">中彩网</a> 首页自行探索。</span>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    本页为用途介绍卡片 · 内容基于公开信息整理 · 仅供参考
+  </div>
+
+</div>
+</body>
+</html>
